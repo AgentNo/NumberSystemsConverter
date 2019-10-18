@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace projNumberSystemsConverter
 {
-    public partial class Form1 : Form
+    public partial class Help : Form
     {
-        public Form1()
+        public Help()
         {
             InitializeComponent();
+        }
+
+        private void btnOk_Help_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
