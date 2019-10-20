@@ -1,6 +1,6 @@
 ﻿namespace projNumberSystemsConverter
 {
-    partial class Help
+    partial class frmHelp
     {
         /// <summary>
         /// Required designer variable.
@@ -50,14 +50,14 @@
             this.lstHelp.Size = new System.Drawing.Size(509, 264);
             this.lstHelp.TabIndex = 1;
             // 
-            // Help
+            // frmHelp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 331);
             this.Controls.Add(this.btnOk_Help);
             this.Controls.Add(this.lstHelp);
-            this.Name = "Help";
+            this.Name = "frmHelp";
             this.Text = "frmHelp";
             this.ResumeLayout(false);
 

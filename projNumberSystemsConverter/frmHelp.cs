@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace projNumberSystemsConverter
 {
-    public partial class Help : Form
+    public partial class frmHelp : Form
     {
-        public Help()
+        public frmHelp()
         {
             InitializeComponent();
             //Fill the listbox with help dialogue.
