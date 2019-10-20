@@ -27,12 +27,37 @@ namespace projNumberSystemsConverter
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            //When this button is clicked, clear all fields in the form
+
+            //Clear listboxes
+            cboConvertFrom.SelectedIndex = -1;
+            cboConvertTo.SelectedIndex = -1;
+
+            //Clear textboxes
+            txtConvertFrom.Clear();
+            txtConvertTo.Clear();
 
         }//btnClear_Click
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
+            /* When this button is pressed, call a new instance of the help form (frmHelp). This provides the user with instructions 
+             * on how to use the application, as well as providing some pointers on what sort of input is acceptable.
+            */
 
+            DialogResult dialogResult = MessageBox.Show("Go to the help screen?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                //Open a new instance of the help form
+                Form help = new frmHelp();
+                help.ShowDialog();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //otherwise do nothing
+                txtConvertFrom.Focus();
+            }
         }//btnHelp_Click
 
         private void btnExplanation_Click(object sender, EventArgs e)
