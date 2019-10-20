@@ -82,5 +82,14 @@ namespace projNumberSystemsConverter
                 txtConvertFrom.Focus();
             }
         }//btnExit_Click
+
+        private void btnConvert_Enter(object sender, KeyEventArgs e)
+        {
+            //Allows the user to press the enter key to activate the Convert button, as long as it is highlighted.
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnConvert_Click(this, new EventArgs());
+            }//if
+        }//btnConvert_Enter
     }//class
 }//namespace
