@@ -77,7 +77,7 @@
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(75, 23);
             this.btnHelp.TabIndex = 6;
-            this.btnHelp.Text = "Help";
+            this.btnHelp.Text = "frmHelp";
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
