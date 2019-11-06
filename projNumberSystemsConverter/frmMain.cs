@@ -16,8 +16,8 @@ namespace projNumberSystemsConverter
         {
             InitializeComponent();
             //Populate combo boxes with number systems
-            cboConvertFrom.Items.AddRange(new object[] { "Denary/Decimal", "Binary", "Octal", "Hexadecimal" });
-            cboConvertTo.Items.AddRange(new object[] { "Denary/Decimal", "Binary", "Octal", "Hexadecimal" });
+            cboConvertFrom.Items.AddRange(new object[] { "Decimal", "Binary", "Octal", "Hexadecimal" });
+            cboConvertTo.Items.AddRange(new object[] { "Decimal", "Binary", "Octal", "Hexadecimal" });
         }//frmMain()
 
         private void btnConvert_Click(object sender, EventArgs e)
@@ -91,5 +91,81 @@ namespace projNumberSystemsConverter
                 btnConvert_Click(this, new EventArgs());
             }//if
         }//btnConvert_Enter
+
+        //************************
+        //   CONVERSION METHODS
+        //************************
+
+        private string decimalToBinary(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 10);
+            return Convert.ToString(tempInput, 2);
+        }//decimalToBinary
+
+        private String octalToBinary(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 8);
+            return Convert.ToString(tempInput, 2);
+        }//octalToBinary
+
+        private String hexToBinary(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 16);
+            return Convert.ToString(tempInput, 2);
+        }//hexToBinary
+
+        private string decimalToOctal(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 10);
+            return Convert.ToString(tempInput, 8);
+        }//decimalToOctal
+
+        private string binaryToOctal(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 2);
+            return Convert.ToString(tempInput, 8);
+        }//binaryToOctal
+
+        private string hexToOctal(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 16);
+            return Convert.ToString(tempInput, 8);
+        }//hexToOctal
+
+        private string decimalToHex(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 10);
+            return Convert.ToString(tempInput, 16).ToUpper();
+        }//decimalToHex
+
+        private string binaryToHex(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 2);
+            return Convert.ToString(tempInput, 16).ToUpper();
+        }//binaryToHex
+
+        private string octalToHex(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 8);
+            return Convert.ToString(tempInput, 16).ToUpper();
+        }//octalToHex
+
+        private String binaryToDecimal(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 2);
+            return Convert.ToString(input);
+        }//binaryToDecimal
+
+        private String octalToDecimal(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 8);
+            return Convert.ToString(input);
+        }//binaryToDecimal
+
+        private String hexToDecimal(String input)
+        {
+            int tempInput = Convert.ToInt32(input, 16);
+            return Convert.ToString(input);
+        }//binaryToDecimal
     }//class
 }//namespace
