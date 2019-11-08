@@ -60,11 +60,6 @@ namespace projNumberSystemsConverter
             }
         }//btnHelp_Click
 
-        private void btnExplanation_Click(object sender, EventArgs e)
-        {
-
-        }//btnExplanation_Click
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             // When this button is clicked, the form will close. First, display a message box to the user asking to confirm their choice
@@ -137,8 +132,7 @@ namespace projNumberSystemsConverter
             int tempInput = Convert.ToInt32(input, 10);
             return Convert.ToString(tempInput, 16).ToUpper();
         }//decimalToHex
-
-        private string binaryToHex(String input)
+               private string binaryToHex(String input)
         {
             int tempInput = Convert.ToInt32(input, 2);
             return Convert.ToString(tempInput, 16).ToUpper();
