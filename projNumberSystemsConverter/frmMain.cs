@@ -37,6 +37,8 @@ namespace projNumberSystemsConverter
             txtConvertFrom.Clear();
             txtConvertTo.Clear();
 
+            //Clear tooltips
+
         }//btnClear_Click
 
         private void btnHelp_Click(object sender, EventArgs e)

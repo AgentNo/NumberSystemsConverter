@@ -51,16 +51,6 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnExplanation
-            // 
-            this.btnExplanation.Location = new System.Drawing.Point(268, 128);
-            this.btnExplanation.Name = "btnExplanation";
-            this.btnExplanation.Size = new System.Drawing.Size(75, 23);
-            this.btnExplanation.TabIndex = 8;
-            this.btnExplanation.Text = "Explanation";
-            this.btnExplanation.UseVisualStyleBackColor = true;
-            this.btnExplanation.Click += new System.EventHandler(this.btnExplanation_Click);
-            // 
             // btnExit
             // 
             this.btnExit.Location = new System.Drawing.Point(268, 181);
