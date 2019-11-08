@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnExplanation = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnConvert = new System.Windows.Forms.Button();
@@ -138,7 +137,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 227);
             this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnExplanation);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnConvert);
@@ -159,7 +157,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnExplanation;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Button btnConvert;
