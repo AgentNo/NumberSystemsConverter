@@ -20,9 +20,13 @@ namespace projNumberSystemsConverter
             cboConvertTo.Items.AddRange(new object[] { "Decimal", "Binary", "Octal", "Hexadecimal" });
         }//frmMain()
 
+        //************************
+        //   BUTTON EVENTS
+        //************************
+
         private void btnConvert_Click(object sender, EventArgs e)
         {
-
+            
         }//btnConvert_Click
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -37,7 +41,10 @@ namespace projNumberSystemsConverter
             txtConvertFrom.Clear();
             txtConvertTo.Clear();
 
-            //Clear tooltips
+            //Clear tooltips (if they were used)
+            lblConvertFromCbo.Text = "";
+            lblConvertFromTxt.Text = "";
+            lblConvertToCbo.Text = "";
 
         }//btnClear_Click
 
@@ -58,7 +65,7 @@ namespace projNumberSystemsConverter
             else if (dialogResult == DialogResult.No)
             {
                 //otherwise do nothing
-                txtConvertFrom.Focus();
+                return;
             }
         }//btnHelp_Click
 
@@ -163,5 +170,9 @@ namespace projNumberSystemsConverter
             int tempInput = Convert.ToInt32(input, 16);
             return Convert.ToString(input);
         }//binaryToDecimal
+
+        //************************
+        //   VALIDATION METHODS
+        //************************
     }//class
 }//namespace

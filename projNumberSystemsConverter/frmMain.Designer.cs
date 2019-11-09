@@ -38,11 +38,14 @@
             this.lblConvertTo = new System.Windows.Forms.Label();
             this.lblConvertFrom = new System.Windows.Forms.Label();
             this.cboConvertFrom = new System.Windows.Forms.ComboBox();
+            this.lblConvertFromCbo = new System.Windows.Forms.Label();
+            this.lblConvertFromTxt = new System.Windows.Forms.Label();
+            this.lblConvertToCbo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(150, 128);
+            this.btnClear.Location = new System.Drawing.Point(268, 128);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 7;
@@ -66,7 +69,7 @@
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(75, 23);
             this.btnHelp.TabIndex = 6;
-            this.btnHelp.Text = "frmHelp";
+            this.btnHelp.Text = "Help";
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
@@ -131,11 +134,44 @@
             this.cboConvertFrom.Size = new System.Drawing.Size(121, 21);
             this.cboConvertFrom.TabIndex = 1;
             // 
+            // lblConvertFromCbo
+            // 
+            this.lblConvertFromCbo.AutoSize = true;
+            this.lblConvertFromCbo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblConvertFromCbo.ForeColor = System.Drawing.Color.Red;
+            this.lblConvertFromCbo.Location = new System.Drawing.Point(224, 12);
+            this.lblConvertFromCbo.Name = "lblConvertFromCbo";
+            this.lblConvertFromCbo.Size = new System.Drawing.Size(0, 18);
+            this.lblConvertFromCbo.TabIndex = 0;
+            // 
+            // lblConvertFromTxt
+            // 
+            this.lblConvertFromTxt.AutoSize = true;
+            this.lblConvertFromTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblConvertFromTxt.ForeColor = System.Drawing.Color.Red;
+            this.lblConvertFromTxt.Location = new System.Drawing.Point(349, 39);
+            this.lblConvertFromTxt.Name = "lblConvertFromTxt";
+            this.lblConvertFromTxt.Size = new System.Drawing.Size(0, 18);
+            this.lblConvertFromTxt.TabIndex = 0;
+            // 
+            // lblConvertToCbo
+            // 
+            this.lblConvertToCbo.AutoSize = true;
+            this.lblConvertToCbo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblConvertToCbo.ForeColor = System.Drawing.Color.Red;
+            this.lblConvertToCbo.Location = new System.Drawing.Point(224, 78);
+            this.lblConvertToCbo.Name = "lblConvertToCbo";
+            this.lblConvertToCbo.Size = new System.Drawing.Size(0, 18);
+            this.lblConvertToCbo.TabIndex = 0;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 227);
+            this.Controls.Add(this.lblConvertToCbo);
+            this.Controls.Add(this.lblConvertFromTxt);
+            this.Controls.Add(this.lblConvertFromCbo);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnHelp);
@@ -166,6 +202,9 @@
         private System.Windows.Forms.Label lblConvertTo;
         private System.Windows.Forms.Label lblConvertFrom;
         private System.Windows.Forms.ComboBox cboConvertFrom;
+        private System.Windows.Forms.Label lblConvertFromCbo;
+        private System.Windows.Forms.Label lblConvertFromTxt;
+        private System.Windows.Forms.Label lblConvertToCbo;
     }
 }
 
