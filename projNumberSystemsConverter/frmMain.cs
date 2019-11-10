@@ -26,7 +26,102 @@ namespace projNumberSystemsConverter
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
-            
+            string input;
+
+            /* This button will connect together all the methods in this class.
+             * First, validation must take place to ensure that the user has correctly filled out the form and entered valid input
+             * Next, the input itself must be checked to ensure that it is valid within the number system that the user has selected
+             * Finally, if the input is valid, the appropriate conversion method is called.
+            */
+
+            // First clear the tooltips if they triggered in a previous attempt
+            lblConvertFromCbo.Text = "";
+            lblConvertFromTxt.Text = "";
+            lblConvertToCbo.Text = "";
+
+            // Presence checks on combo boxes - ensure that there is something there. Error messages are handled by the validateComboBoxes method
+            if (validateComboBoxes())
+            {
+                // If true, return
+                return;
+            }//if
+
+            // Check for whitespace, then OverflowExceptions. If none, assign text to input
+            if (String.IsNullOrWhiteSpace(txtConvertFrom.Text))
+            {
+                MessageBox.Show("Please enter a number to convert.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblConvertFromTxt.Text = ("*");
+                return;
+            }
+            else if (catchOverflowException())
+            {
+                MessageBox.Show("Input number is too big! Enter a smaller number and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtConvertFrom.Clear();
+                lblConvertFromTxt.Text = ("*");
+                return;
+            }
+            else
+            {
+                lblConvertFromTxt.Text = ("*");
+                input = Convert.ToString(txtConvertFrom.Text);
+            }//if
+
+            // Now validate the content of the string against the number system that the user has selected. If this passes, then call the appropriate conversion method.
+            if (validateStringContent(input))
+            {
+                if (cboConvertFrom.SelectedIndex == 0 && cboConvertTo.SelectedIndex == 1)
+                {
+                    decimalToBinary(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 2 && cboConvertTo.SelectedIndex == 1)
+                {
+                    octalToBinary(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 3 && cboConvertTo.SelectedIndex == 1)
+                {
+                    hexToBinary(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 0 && cboConvertTo.SelectedIndex == 2)
+                {
+                    decimalToOctal(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 1 && cboConvertTo.SelectedIndex == 2)
+                {
+                    binaryToOctal(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 3 && cboConvertTo.SelectedIndex == 2)
+                {
+                    hexToOctal(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 0 && cboConvertTo.SelectedIndex == 3)
+                {
+                    decimalToHex(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 1 && cboConvertTo.SelectedIndex == 3)
+                {
+                    binaryToHex(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 2 && cboConvertTo.SelectedIndex == 3)
+                {
+                    octalToHex(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 1 && cboConvertTo.SelectedIndex == 0)
+                {
+                    binaryToDecimal(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 2 && cboConvertTo.SelectedIndex == 0)
+                {
+                    octalToDecimal(input);
+                }
+                else if (cboConvertFrom.SelectedIndex == 3 && cboConvertTo.SelectedIndex == 0)
+                {
+                    hexToDecimal(input);
+                }//if
+            }
+            else
+            {
+                return;
+            }//if
         }//btnConvert_Click
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -82,8 +177,7 @@ namespace projNumberSystemsConverter
             }
             else if (dialogResult == DialogResult.No)
             {
-                //otherwise continue
-                txtConvertFrom.Focus();
+                return;
             }
         }//btnExit_Click
 
@@ -141,7 +235,8 @@ namespace projNumberSystemsConverter
             int tempInput = Convert.ToInt32(input, 10);
             return Convert.ToString(tempInput, 16).ToUpper();
         }//decimalToHex
-               private string binaryToHex(String input)
+
+        private string binaryToHex(String input)
         {
             int tempInput = Convert.ToInt32(input, 2);
             return Convert.ToString(tempInput, 16).ToUpper();
@@ -174,5 +269,66 @@ namespace projNumberSystemsConverter
         //************************
         //   VALIDATION METHODS
         //************************
+
+        private Boolean catchOverflowException()
+        {
+            /* This method checks the input for potential OverflowExceptions by attempting to convert the text in the input area to an int.
+             * If the catch is triggered, return true. Else, if the number system is set to Hex or the catch is not triggered, return false.
+            */ 
+            try
+            {
+                //Exempt Hex as it is string-based, but first check to see that there is something in txtConvertFrom
+                if (cboConvertFrom.SelectedIndex != 3)
+                {
+                    int tempVal = Convert.ToInt32(txtConvertFrom.Text);
+                }
+                else
+                {
+                    return false;
+                }//if
+            }
+            catch (OverflowException)
+            {
+                return true;
+            }//trycatch
+
+            return false;
+        }//catchOverflowException
+
+        private Boolean validateComboBoxes()
+        {
+            // Ensure that something is selected for both boxes and that both boxes are not set to the same option
+            if (cboConvertFrom.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a number system to convert from.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblConvertFromCbo.Text = "*";
+                return true;
+
+            }
+            else if (cboConvertTo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a number system to convert to.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblConvertToCbo.Text = "*";
+                return true;
+            }
+            else if (((cboConvertTo.SelectedIndex) == (cboConvertFrom.SelectedIndex)))
+            {
+                MessageBox.Show("You are converting to the same number system! Please select a different number system and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Assuming only cboConvertTo needs to be cleared - do so
+                cboConvertTo.SelectedIndex = -1;
+                txtConvertTo.Clear();
+                lblConvertToCbo.Text = "*";
+                return true;
+            }
+            else
+            {
+                return false;
+            }//if
+        }//validateComboBoxes
+
+        private Boolean validateStringContent(string input)
+        {
+            return true;
+        }//validateStringContent
     }//class
 }//namespace
