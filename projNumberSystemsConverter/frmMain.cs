@@ -56,9 +56,7 @@ namespace projNumberSystemsConverter
             }
             else if (catchOverflowException())
             {
-                MessageBox.Show("Input number is too big! Enter a smaller number and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtConvertFrom.Clear();
-                lblConvertFromTxt.Text = ("*");
+                // Error messages handled by catchOverflowException() method
                 return;
             }
             else
@@ -276,13 +274,14 @@ namespace projNumberSystemsConverter
         {
             /* This method checks the input for potential OverflowExceptions by attempting to convert the text in the input area to an int.
              * If the catch is triggered, return true. Else, if the number system is set to Hex or the catch is not triggered, return false.
-            */ 
+            */
             try
             {
                 //Exempt Hex as it is string-based, but first check to see that there is something in txtConvertFrom
                 if (cboConvertFrom.SelectedIndex != 3)
                 {
-                    int tempVal = Convert.ToInt32(txtConvertFrom.Text);
+                    string temp = Convert.ToString(txtConvertFrom.Text);
+                    int tempVal = Convert.ToInt32(temp, 10);
                 }
                 else
                 {
@@ -291,6 +290,17 @@ namespace projNumberSystemsConverter
             }
             catch (OverflowException)
             {
+                MessageBox.Show("Input number is too big! Enter a smaller number and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtConvertFrom.Clear();
+                lblConvertFromTxt.Text = ("*");
+                return true;
+            }
+            catch (FormatException)
+            {
+                // Format exception may be thrown if non-parseable characters are added to the string
+                MessageBox.Show("Unrecognised characters in input! Check input and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtConvertFrom.Clear();
+                lblConvertFromTxt.Text = ("*");
                 return true;
             }//trycatch
 
@@ -333,7 +343,7 @@ namespace projNumberSystemsConverter
             // This will validate the content of the string against the selected number system by calling the appropriate validator
             if (cboConvertFrom.SelectedIndex == 0)
             {
-                if (validateOctal(input))
+                if (validateDecimal(input))
                 {
                     return true;
                 }
