@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace projNumberSystemsConverter
 {
@@ -62,8 +63,8 @@ namespace projNumberSystemsConverter
             }
             else
             {
-                lblConvertFromTxt.Text = ("*");
-                input = Convert.ToString(txtConvertFrom.Text);
+                // ToLower() is used to sanitise Hex stirngs for validation
+                input = Convert.ToString(txtConvertFrom.Text).ToLower();
             }//if
 
             // Now validate the content of the string against the number system that the user has selected. If this passes, then call the appropriate conversion method.
@@ -120,6 +121,7 @@ namespace projNumberSystemsConverter
             }
             else
             {
+                // Error messages are handled by the validateStringContent() methods
                 return;
             }//if
         }//btnConvert_Click
@@ -194,73 +196,73 @@ namespace projNumberSystemsConverter
         //   CONVERSION METHODS
         //************************
 
-        private string decimalToBinary(String input)
+        private string decimalToBinary(string input)
         {
             int tempInput = Convert.ToInt32(input, 10);
             return Convert.ToString(tempInput, 2);
         }//decimalToBinary
 
-        private String octalToBinary(String input)
+        private string octalToBinary(string input)
         {
             int tempInput = Convert.ToInt32(input, 8);
             return Convert.ToString(tempInput, 2);
         }//octalToBinary
 
-        private String hexToBinary(String input)
+        private string hexToBinary(string input)
         {
             int tempInput = Convert.ToInt32(input, 16);
             return Convert.ToString(tempInput, 2);
         }//hexToBinary
 
-        private string decimalToOctal(String input)
+        private string decimalToOctal(string input)
         {
             int tempInput = Convert.ToInt32(input, 10);
             return Convert.ToString(tempInput, 8);
         }//decimalToOctal
 
-        private string binaryToOctal(String input)
+        private string binaryToOctal(string input)
         {
             int tempInput = Convert.ToInt32(input, 2);
             return Convert.ToString(tempInput, 8);
         }//binaryToOctal
 
-        private string hexToOctal(String input)
+        private string hexToOctal(string input)
         {
             int tempInput = Convert.ToInt32(input, 16);
             return Convert.ToString(tempInput, 8);
         }//hexToOctal
 
-        private string decimalToHex(String input)
+        private string decimalToHex(string input)
         {
             int tempInput = Convert.ToInt32(input, 10);
             return Convert.ToString(tempInput, 16).ToUpper();
         }//decimalToHex
 
-        private string binaryToHex(String input)
+        private string binaryToHex(string input)
         {
             int tempInput = Convert.ToInt32(input, 2);
             return Convert.ToString(tempInput, 16).ToUpper();
         }//binaryToHex
 
-        private string octalToHex(String input)
+        private string octalToHex(string input)
         {
             int tempInput = Convert.ToInt32(input, 8);
             return Convert.ToString(tempInput, 16).ToUpper();
         }//octalToHex
 
-        private String binaryToDecimal(String input)
+        private string binaryToDecimal(string input)
         {
             int tempInput = Convert.ToInt32(input, 2);
             return Convert.ToString(input);
         }//binaryToDecimal
 
-        private String octalToDecimal(String input)
+        private string octalToDecimal(string input)
         {
             int tempInput = Convert.ToInt32(input, 8);
             return Convert.ToString(input);
         }//binaryToDecimal
 
-        private String hexToDecimal(String input)
+        private string hexToDecimal(string input)
         {
             int tempInput = Convert.ToInt32(input, 16);
             return Convert.ToString(input);
@@ -328,7 +330,119 @@ namespace projNumberSystemsConverter
 
         private Boolean validateStringContent(string input)
         {
-            return true;
+            // This will validate the content of the string against the selected number system by calling the appropriate validator
+            if (cboConvertFrom.SelectedIndex == 0)
+            {
+                if (validateOctal(input))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }//if
+            }
+            else if (cboConvertFrom.SelectedIndex == 1)
+            {
+                if (validateBinary(input))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }//if
+            }
+            else if (cboConvertFrom.SelectedIndex == 2)
+            {
+                if (validateOctal(input))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }//if
+            }
+            else if (cboConvertFrom.SelectedIndex == 3)
+            {
+                if (validateHex(input))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }//if
+            }
+            else
+            {
+                return false;
+            }//if
         }//validateStringContent
+
+        private Boolean validateDecimal(string input)
+        {
+            Regex isDecimal = new Regex("[^0-9]");
+            if(!isDecimal.IsMatch(input))
+            {
+                return true;
+            }
+            else
+            {
+                // Inform the user and return false
+                MessageBox.Show("Decimal can only contain numbers 0-9. Check input and try again,", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblConvertFromTxt.Text = ("*");
+                return false;
+            }//if
+        }//validateDecimal
+
+        private Boolean validateBinary(string input)
+        {
+            Regex isBinary = new Regex("[^0-1]");
+            if (!isBinary.IsMatch(input))
+            {
+                return true;
+            }
+            else
+            {
+                // Inform the user and return false
+                MessageBox.Show("Binary can only contain numbers 0 and 1. Check input and try again,", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblConvertFromTxt.Text = ("*");
+                return false;
+            }//if
+        }//validateBinary
+
+        private Boolean validateOctal(string input)
+        {
+            Regex isOctal = new Regex("[^0-7]");
+            if (!isOctal.IsMatch(input))
+            {
+                return true;
+            }
+            else
+            {
+                // Inform the user and return false
+                MessageBox.Show("Octal can only contain numbers 0-7. Check input and try again,", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblConvertFromTxt.Text = ("*");
+                return false;
+            }//if
+        }//validateOctal
+
+        private Boolean validateHex(string input)
+        {
+            Regex isHex = new Regex("[^0-9a-f]");
+            if (!isHex.IsMatch(input))
+            {
+                return true;
+            }
+            else
+            {
+                // Inform the user and return false
+                MessageBox.Show("Hexadecimal can only contain numbers 0-9 and letters A-F. Check input and try again,", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblConvertFromTxt.Text = ("*");
+                return false;
+            }//if
+        }//validateHex
     }//class
 }//namespace
